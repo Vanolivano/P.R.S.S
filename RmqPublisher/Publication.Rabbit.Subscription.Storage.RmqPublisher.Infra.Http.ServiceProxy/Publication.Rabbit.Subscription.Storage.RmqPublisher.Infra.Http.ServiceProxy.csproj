@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Dev.Tools\Dev.Tools.csproj" />
+      <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

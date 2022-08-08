@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>Publication.Rabbit.Subscription.Storage.RmqPublisher</RootNamespace>
+      
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common\Dev.Tools\Dev.Tools.csproj" />
+      <ProjectReference Include="..\..\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj" />
+    </ItemGroup>
+
+</Project>
