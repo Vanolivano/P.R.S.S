@@ -8,19 +8,20 @@ using Dev.Tools.Errors;
 using Dev.Tools.Errors.Default;
 using Dev.Tools.Helpers;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.ServiceProxy
+namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 {
 	internal sealed partial class HttpRmqPublisherServiceProxy
 	{
 		private const string MediaType = "application/json";
 		private const string RequestPrefix = "api/v1";
 
-		private string _baseRequestUri;
-		private HttpClient _httpClient;
+		private readonly string _baseRequestUri;
+		private readonly HttpClient _httpClient;
 
 		public HttpRmqPublisherServiceProxy(HttpClient httpClient)
 		{
 			_httpClient = httpClient;
+			_baseRequestUri = "https://localhost:7171";
 		}
 
 		private static HttpRequestMessage CreateHttpRequestMessage<T>(
@@ -36,7 +37,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Servic
 					Encoding.UTF8,
 					MediaType)
 			};
-			request.Headers.AppendAuthorizationHeader(sessionIdentifier);
+			//request.Headers.AppendAuthorizationHeader(sessionIdentifier);
 
 			return request;
 		}
@@ -45,19 +46,30 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Servic
 			HttpRequestMessage request,
 			CancellationToken token)
 		{
-			using var response = await _httpClient.SendAsync(request, token)
-				.ConfigureAwait(false);
-
-			if (response.IsSuccessStatusCode)
+			try
 			{
-				return new SuccessData {Succeeded = true};
+				using var response = await _httpClient.SendAsync(request, token)
+					.ConfigureAwait(false);
+
+				if (response.IsSuccessStatusCode)
+				{
+					return new SuccessData {Succeeded = true};
+				}
+
+				return new SuccessData
+				{
+					ErrorData = await GetErrorDataAsync(response).ConfigureAwait(false),
+					Succeeded = false
+				};
 			}
-
-			return new SuccessData
+			catch (Exception e)
 			{
-				ErrorData = await GetErrorDataAsync(response).ConfigureAwait(false),
-				Succeeded = false
-			};
+				Console.WriteLine($"Error while sending http request. Reason: {e}.");
+				return new SuccessData
+				{
+					ErrorData = new ErrorData(e.Message, 500)
+				};
+			}
 		}
 
 		private static async Task<ErrorData> GetErrorDataAsync(HttpResponseMessage response)
@@ -69,10 +81,10 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Servic
 				ErrorMessage = errorMessage,
 			};
 		}
-		
-		private string GetRmqPublisherUri(string operation, Guid? id = null)=>
+
+		private string GetRmqPublisherUri(string operation, Guid? id = null) =>
 			GetRequestUri("rmq-publisher", operation, id);
-		
+
 		private string GetRequestUri(string controller, string operation, Guid? id)
 		{
 			var res = UrlHelper.Combine(
@@ -83,6 +95,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Servic
 			{
 				res = UrlHelper.Combine(res, id.ToString());
 			}
+
 			if (operation != null)
 			{
 				res = UrlHelper.Combine(res, operation);

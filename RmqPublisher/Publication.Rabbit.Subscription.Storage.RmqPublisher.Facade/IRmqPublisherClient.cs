@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools;
 using Dev.Tools.Errors;
-using Publication.Rabbit.Subscription.Storage.RmqPublisher.Args;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher
+namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade
 {
 	public interface IRmqPublisherClient
 	{
