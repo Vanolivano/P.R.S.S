@@ -25,13 +25,17 @@ namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 			var service = provider.GetRequiredService<IRmqPublisherClient>();
 			
 			
-			await service.SendData(new PersonArgs
+			var result = await service.SendData(new PersonArgs
 			{
-				Age = 12,
+				Age = 18,
 				Gender = Gender.M,
 				Name = "Ivan",
-				BirthDate = new DateTime(2012, 01, 12)
+				BirthDate = new DateTime(2002, 01, 12)
 			}).ConfigureAwait(false);
+
+			Console.WriteLine(result.ErrorData != null
+				? $"Error codee: {result.ErrorData.ErrorCode}{Environment.NewLine}Error message: {result.ErrorData.ErrorMessage}."
+				: "Person data has been sent successfully.");
 		}
 
 		private static string GetName()

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Validators;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 {
@@ -14,6 +16,8 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 			builder.Services.AddHttpClient();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+			builder.Services.AddValidation();
+			builder.Services.AddRmqPublisherService();
 
 			var app = builder.Build();
 			

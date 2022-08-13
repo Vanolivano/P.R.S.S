@@ -2,17 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.2.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services.csproj" />
       <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj" />
     </ItemGroup>
 

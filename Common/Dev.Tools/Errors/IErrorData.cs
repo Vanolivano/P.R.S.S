@@ -4,6 +4,6 @@
 	{
 		string ErrorMessage { get; }
 
-		int? ErrorCode { get; }
+		int ErrorCode { get; }
 	}
 }
