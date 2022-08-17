@@ -1,13 +1,11 @@
+using System;
 using Dev.Tools.Configs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services;
-using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Validators;
-using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
+namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
 {
 	internal class Program
 	{
@@ -16,21 +14,19 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 			var builder = WebApplication.CreateBuilder(args);
 
 			builder.Services.AddControllers();
-			builder.Services.AddHttpClient();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
-			builder.Services.AddValidation();
-			builder.Services.AddRmqPublisherService();
-			builder.Services.AddRmqSubscriberClient();
+
 			builder.Services.Configure<RabbitConfig>(config =>
 			{
 				config.ExchangeName = builder.Configuration.GetValue<string>("RABBIT_MQ_EXCHANGE_NAME_STRING");
 				config.ConnectionString = builder.Configuration.GetValue<string>("RABBIT_MQ_CONNECTION_STRING");
 			});
 
-
 			var app = builder.Build();
 
+			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();

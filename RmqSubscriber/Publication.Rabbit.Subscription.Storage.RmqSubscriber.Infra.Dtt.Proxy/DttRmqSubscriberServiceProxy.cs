@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Text;
+using Dev.Tools.Configs;
 using Dev.Tools.Errors;
 using Dev.Tools.Errors.Default;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.Args;
@@ -11,7 +14,15 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 {
 	public class DttRmqSubscriberServiceProxy : IRmqSubscriberClient
 	{
-		private const string ExchangeName = "amq.direct";
+		private readonly RabbitConfig _rabbitConfig;
+		private readonly ILogger<DttRmqSubscriberServiceProxy> _logger;
+
+		public DttRmqSubscriberServiceProxy(IOptions<RabbitConfig> rabbitConfig,
+			ILogger<DttRmqSubscriberServiceProxy> logger)
+		{
+			_logger = logger;
+			_rabbitConfig = rabbitConfig.Value ?? throw new ArgumentNullException(nameof(rabbitConfig));
+		}
 
 		public ISuccessData SendData(IPersonArgs personArgs)
 		{
@@ -19,24 +30,27 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 			{
 				var eventName = personArgs.GetType().Name;
 				var factory = new ConnectionFactory
-					{HostName = "localhost", Password = "guest", Port = 5672, UserName = "guest"};
+				{
+					Uri = new Uri(_rabbitConfig.ConnectionString)
+				};
 				using var connection = factory.CreateConnection();
 				using var channel = connection.CreateModel();
-				// channel.ExchangeDeclare(exchange:ExchangeName,
+				// channel.ExchangeDeclare(exchange:_rabbitConfig.ExchangeName,
 				// 	type: "direct");
 				string message = JsonConvert.SerializeObject(personArgs);
 				var body = Encoding.UTF8.GetBytes(message);
-				channel.BasicPublish(exchange: ExchangeName,
+				channel.BasicPublish(
+					exchange: _rabbitConfig.ExchangeName,
 					routingKey: eventName,
 					basicProperties: null,
 					body: body);
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				Console.WriteLine(e);
+				_logger.LogError(ex.Message);
 				return new SuccessData
 				{
-					ErrorData = new ErrorData(e.Message, 500)
+					ErrorData = new ErrorData(ex.Message, 500)
 				};
 			}
 
