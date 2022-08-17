@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Validators;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 {
@@ -18,9 +19,11 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 			builder.Services.AddSwaggerGen();
 			builder.Services.AddValidation();
 			builder.Services.AddRmqPublisherService();
+			builder.Services.AddRmqSubscriberClient();
+
 
 			var app = builder.Build();
-			
+
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
@@ -35,6 +38,5 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 
 			app.Run();
 		}
-		
 	}
 }

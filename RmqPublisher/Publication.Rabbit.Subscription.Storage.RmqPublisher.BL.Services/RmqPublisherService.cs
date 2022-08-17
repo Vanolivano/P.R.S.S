@@ -1,17 +1,27 @@
 ﻿using Dev.Tools.Errors;
-using Dev.Tools.Errors.Default;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.Models;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.Services;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.Args.Default;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services
 {
 	public class RmqPublisherService : IRmqPublisherService
 	{
-		public ISuccessData SendData(IPerson person)
+		private readonly IRmqSubscriberClient _subscriberClient;
+
+		public RmqPublisherService(IRmqSubscriberClient subscriberClient)
 		{
-			// return new SuccessData {Succeeded = true};
-			throw new System.NotImplementedException();
+			_subscriberClient = subscriberClient;
 		}
+
+		public ISuccessData SendData(IPerson person) =>
+			_subscriberClient.SendData(new PersonArgs
+			{
+				Name = person.Name,
+				Age = person.Age,
+				Gender = person.Gender,
+				BirthDate = person.BirthDate
+			});
 	}
 }
-
