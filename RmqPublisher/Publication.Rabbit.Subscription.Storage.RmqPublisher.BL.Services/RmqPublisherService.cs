@@ -1,4 +1,4 @@
-﻿using Dev.Tools.Errors;
+﻿using Dev.Tools.Results;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.Models;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.Services;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade;

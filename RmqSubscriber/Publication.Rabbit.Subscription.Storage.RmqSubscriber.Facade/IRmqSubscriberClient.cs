@@ -1,4 +1,4 @@
-﻿using Dev.Tools.Errors;
+﻿using Dev.Tools.Results;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.Args;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools.Errors;
+using Dev.Tools.Results;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args;
 

@@ -1,4 +1,4 @@
-namespace Dev.Tools.Errors.Default
+namespace Dev.Tools.Results.Default
 {
 	public class ErrorData : IErrorData
 	{

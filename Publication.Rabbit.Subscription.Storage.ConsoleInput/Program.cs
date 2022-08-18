@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Dev.Tools.Configs;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Publication.Rabbit.Subscription.Storage.Models;
@@ -14,17 +16,33 @@ namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 		static async Task Main(string[] args)
 		{
 			using IHost host = Host.CreateDefaultBuilder(args)
-				.ConfigureServices((_, services) =>
-					services
-						.AddHttpClient()
-						.AddRmqPublisherClient())
-						.Build();
+				.ConfigureServices((hostBuilder, services) =>
+				{
+					services.AddRmqPublisherClient();
+					
+					var httpClientName =
+						hostBuilder.Configuration.GetValue<string>("RMQ-PUBLISHER-HTTP-CLIENT-NAME-STRING");
+					var httpClientBaseAddress =
+						hostBuilder.Configuration.GetValue<string>("RMQ-PUBLISHER-HTTP-CLIENT-BASE-ADDRESS");
+
+					services.AddHttpClient(httpClientName, x =>
+					{
+						x.BaseAddress = new Uri(httpClientBaseAddress);
+					});
+
+					services.Configure<HttpClientConfig>(config =>
+					{
+						config.HttpClientName = httpClientName;
+						config.HttpClientBaseAddress = httpClientBaseAddress;
+					});
+				})
+				.Build();
 
 			using IServiceScope serviceScope = host.Services.CreateScope();
 			IServiceProvider provider = serviceScope.ServiceProvider;
 			var service = provider.GetRequiredService<IRmqPublisherClient>();
-			
-			
+
+
 			var result = await service.SendData(new PersonArgs
 			{
 				Age = 18,

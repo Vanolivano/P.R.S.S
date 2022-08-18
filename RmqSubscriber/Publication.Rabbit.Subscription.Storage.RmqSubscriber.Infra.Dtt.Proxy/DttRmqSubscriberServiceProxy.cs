@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
 using Dev.Tools.Configs;
-using Dev.Tools.Errors;
-using Dev.Tools.Errors.Default;
+using Dev.Tools.Results;
+using Dev.Tools.Results.Builders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -48,13 +48,11 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 			catch (Exception ex)
 			{
 				_logger.LogError(ex.Message);
-				return new SuccessData
-				{
-					ErrorData = new ErrorData(ex.Message, 500)
-				};
+
+				return SuccessDataBuilder.BuildError(ex);
 			}
 
-			return new SuccessData {Succeeded = true};
+			return SuccessDataBuilder.BuildSuccess();
 		}
 	}
 }

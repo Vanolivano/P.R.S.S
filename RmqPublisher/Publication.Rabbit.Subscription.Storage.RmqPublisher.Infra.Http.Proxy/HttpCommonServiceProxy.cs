@@ -4,9 +4,12 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools.Errors;
-using Dev.Tools.Errors.Default;
+using Dev.Tools.Configs;
 using Dev.Tools.Helpers;
+using Dev.Tools.Results;
+using Dev.Tools.Results.Builders;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 {
@@ -15,13 +18,17 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 		private const string MediaType = "application/json";
 		private const string RequestPrefix = "api/v1";
 
-		private readonly string _baseRequestUri;
 		private readonly HttpClient _httpClient;
+		private readonly ILogger<HttpRmqPublisherServiceProxy> _logger;
 
-		public HttpRmqPublisherServiceProxy(HttpClient httpClient)
+
+		public HttpRmqPublisherServiceProxy(
+			IOptions<HttpClientConfig> config,
+			IHttpClientFactory httpClientFactory,
+			ILogger<HttpRmqPublisherServiceProxy> logger)
 		{
-			_httpClient = httpClient;
-			_baseRequestUri = "https://localhost:7171";
+			_httpClient = httpClientFactory.CreateClient(config.Value.HttpClientName);
+			_logger = logger;
 		}
 
 		private static HttpRequestMessage CreateHttpRequestMessage<T>(
@@ -53,42 +60,30 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 
 				if (response.IsSuccessStatusCode)
 				{
-					return new SuccessData {Succeeded = true};
+					return SuccessDataBuilder.BuildSuccess();
 				}
 
-				return new SuccessData
-				{
-					ErrorData = await GetErrorDataAsync(response).ConfigureAwait(false),
-					Succeeded = false
-				};
+				return SuccessDataBuilder.BuildError(await GetErrorDataAsync(response).ConfigureAwait(false));
 			}
-			catch (Exception e)
+			catch (Exception exception)
 			{
-				Console.WriteLine($"Error while sending http request. Reason: {e}.");
-				return new SuccessData
-				{
-					ErrorData = new ErrorData(e.Message, 500)
-				};
+				_logger.LogError($"Error while sending http request. Reason: {exception.Message}.");
+				return SuccessDataBuilder.BuildError(exception);
 			}
 		}
 
-		private static async Task<ErrorData> GetErrorDataAsync(HttpResponseMessage response)
+		private static async Task<IErrorData> GetErrorDataAsync(HttpResponseMessage response)
 		{
 			var errorMessage = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-			return new ErrorData
-			{
-				ErrorCode = (int) response.StatusCode,
-				ErrorMessage = errorMessage,
-			};
+			return ErrorDataBuilder.BuildErrorData(errorMessage, (int) response.StatusCode);
 		}
 
-		private string GetRmqPublisherUri(string operation, Guid? id = null) =>
+		private static string GetRmqPublisherUri(string operation, Guid? id = null) =>
 			GetRequestUri("rmq-publisher", operation, id);
 
-		private string GetRequestUri(string controller, string operation, Guid? id)
+		private static string GetRequestUri(string controller, string operation, Guid? id)
 		{
 			var res = UrlHelper.Combine(
-				_baseRequestUri,
 				RequestPrefix,
 				controller);
 			if (id != null)

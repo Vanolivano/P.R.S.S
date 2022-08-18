@@ -1,4 +1,4 @@
-﻿namespace Dev.Tools.Errors
+﻿namespace Dev.Tools.Results
 {
 	public interface IErrorData
 	{
