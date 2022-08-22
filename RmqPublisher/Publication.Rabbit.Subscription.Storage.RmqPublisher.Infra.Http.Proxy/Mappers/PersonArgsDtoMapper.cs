@@ -1,9 +1,9 @@
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
+namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.Mappers
 {
-	public static class MapToDtoExtension
+	public static class PersonArgsDtoMapper
 	{
 		public static PersonDto ToDto(this IPersonArgs personArgs)
 		{

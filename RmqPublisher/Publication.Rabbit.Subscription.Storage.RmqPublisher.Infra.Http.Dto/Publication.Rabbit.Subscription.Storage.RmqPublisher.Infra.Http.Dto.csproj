@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj" />
+      <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.csproj" />
     </ItemGroup>
 
 </Project>

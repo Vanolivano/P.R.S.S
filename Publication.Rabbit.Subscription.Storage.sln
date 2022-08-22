@@ -46,6 +46,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscrip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon", "RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon.csproj", "{CB4DCD9B-3900-4002-A769-6C92377882B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto", "RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj", "{BFFA561C-0252-403E-A99B-39D4BCC1B1FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B5F4F3C8-4B13-472D-894D-3CED68CD6A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain", "RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.csproj", "{D9C65C0A-DF36-4323-94D2-EC9C679063DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +106,14 @@ Global
 		{CB4DCD9B-3900-4002-A769-6C92377882B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB4DCD9B-3900-4002-A769-6C92377882B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB4DCD9B-3900-4002-A769-6C92377882B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFFA561C-0252-403E-A99B-39D4BCC1B1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFA561C-0252-403E-A99B-39D4BCC1B1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFA561C-0252-403E-A99B-39D4BCC1B1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFA561C-0252-403E-A99B-39D4BCC1B1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9C65C0A-DF36-4323-94D2-EC9C679063DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C65C0A-DF36-4323-94D2-EC9C679063DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C65C0A-DF36-4323-94D2-EC9C679063DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C65C0A-DF36-4323-94D2-EC9C679063DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{180AEA2E-0223-4C88-800B-2480CAB87022} = {116A8900-2C45-4388-936C-F6CD211E0E17}
@@ -121,5 +135,8 @@ Global
 		{2E3C907B-5AA7-4706-B19E-E9D460E33E68} = {2C524BC5-6A84-47DB-B407-FDB19001D484}
 		{8E72FD30-738E-4ED2-A97C-F848E9E13B20} = {2E3C907B-5AA7-4706-B19E-E9D460E33E68}
 		{CB4DCD9B-3900-4002-A769-6C92377882B7} = {2E3C907B-5AA7-4706-B19E-E9D460E33E68}
+		{BFFA561C-0252-403E-A99B-39D4BCC1B1FC} = {2E3C907B-5AA7-4706-B19E-E9D460E33E68}
+		{B5F4F3C8-4B13-472D-894D-3CED68CD6A52} = {4802D3B6-746F-4022-B559-C189C7DB1C80}
+		{D9C65C0A-DF36-4323-94D2-EC9C679063DF} = {B5F4F3C8-4B13-472D-894D-3CED68CD6A52}
 	EndGlobalSection
 EndGlobal

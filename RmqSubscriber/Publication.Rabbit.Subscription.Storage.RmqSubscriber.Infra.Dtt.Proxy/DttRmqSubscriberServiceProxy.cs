@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.Args;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.Mappers;
 using RabbitMQ.Client;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
@@ -28,22 +29,24 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 		{
 			try
 			{
-				var eventName = personArgs.GetType().Name;
+				var dto = personArgs.ToDto();
 				var factory = new ConnectionFactory
 				{
 					Uri = new Uri(_rabbitConfig.ConnectionString)
 				};
+				//TODO: Подумать, создавать канал каждый раз при отправке сообщения или создать один канал на время жизни сервиса
 				using var connection = factory.CreateConnection();
 				using var channel = connection.CreateModel();
-				// channel.ExchangeDeclare(exchange:_rabbitConfig.ExchangeName,
-				// 	type: "direct");
-				string message = JsonConvert.SerializeObject(personArgs);
+
+				string message = JsonConvert.SerializeObject(dto);
 				var body = Encoding.UTF8.GetBytes(message);
 				channel.BasicPublish(
-					exchange: _rabbitConfig.ExchangeName,
-					routingKey: eventName,
+					exchange: string.Empty,
+					routingKey: dto.PostKey,
 					basicProperties: null,
 					body: body);
+
+				_logger.LogInformation($"Data: {dto} successfully sent to rabbit.");
 			}
 			catch (Exception ex)
 			{

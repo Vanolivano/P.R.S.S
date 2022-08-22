@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Validators;
-using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.DI;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 {

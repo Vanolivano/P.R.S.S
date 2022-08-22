@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Publication.Rabbit.Subscription.Storage.Models;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args.Default;
-using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.DI;
 
 namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 {

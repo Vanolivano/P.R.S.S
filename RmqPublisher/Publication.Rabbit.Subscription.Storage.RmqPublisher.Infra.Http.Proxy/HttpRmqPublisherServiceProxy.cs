@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Dev.Tools.Results;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.Mappers;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 {

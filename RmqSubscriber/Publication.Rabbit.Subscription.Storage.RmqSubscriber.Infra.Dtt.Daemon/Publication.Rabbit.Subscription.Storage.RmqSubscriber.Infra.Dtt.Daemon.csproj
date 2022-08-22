@@ -6,11 +6,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Common\Dev.Tools\Dev.Tools.csproj"/>
+        <ProjectReference Include="..\..\Common\Dev.Tools\Dev.Tools.csproj" />
+        <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj" />
     </ItemGroup>
 
 </Project>
