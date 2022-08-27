@@ -3,13 +3,11 @@
     "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7171;http://localhost:5171",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "RABBIT_MQ_EXCHANGE_NAME_STRING": "amq.direct",
-        "RABBIT_MQ_CONNECTION_STRING": "amqp://guest:guest@localhost:5672"
+        "RABBIT_MQ_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "AUTH_TOKEN": "784aae1c1abb4aa3914f42a81e893ed2"
       }
     }
   }

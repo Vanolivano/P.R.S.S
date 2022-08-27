@@ -17,17 +17,19 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 	{
 		private const string MediaType = "application/json";
 		private const string RequestPrefix = "api/v1";
-
+		private string AuthToken { get; }
 		private readonly HttpClient _httpClient;
 		private readonly ILogger<HttpRmqPublisherServiceProxy> _logger;
 
 
 		public HttpRmqPublisherServiceProxy(
 			IOptions<HttpClientConfig> config,
+			IOptions<AuthConfig> authConfig,
 			IHttpClientFactory httpClientFactory,
 			ILogger<HttpRmqPublisherServiceProxy> logger)
 		{
 			_httpClient = httpClientFactory.CreateClient(config.Value.HttpClientName);
+			AuthToken = authConfig.Value.AuthToken;
 			_logger = logger;
 		}
 
@@ -35,7 +37,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 			HttpMethod method,
 			string requestUri,
 			T dto,
-			string sessionIdentifier)
+			string authToken)
 		{
 			var request = new HttpRequestMessage(method, requestUri)
 			{
@@ -44,7 +46,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 					Encoding.UTF8,
 					MediaType)
 			};
-			//request.Headers.AppendAuthorizationHeader(sessionIdentifier);
+			request.Headers.AppendAuthorizationHeader(authToken);
 
 			return request;
 		}

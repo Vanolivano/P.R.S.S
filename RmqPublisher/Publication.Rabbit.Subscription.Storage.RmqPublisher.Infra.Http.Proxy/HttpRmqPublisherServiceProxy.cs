@@ -16,7 +16,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 				HttpMethod.Post,
 				GetRmqPublisherUri("send-data"),
 				args.ToDto(),
-				default);
+				AuthToken);
 
 			var result = await GetSuccessDataByRequest(request, cancellationToken)
 				.ConfigureAwait(false);

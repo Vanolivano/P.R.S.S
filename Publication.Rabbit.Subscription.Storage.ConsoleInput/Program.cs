@@ -21,9 +21,9 @@ namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 					services.AddRmqPublisherClient();
 					
 					var httpClientName =
-						hostBuilder.Configuration.GetValue<string>("RMQ-PUBLISHER-HTTP-CLIENT-NAME-STRING");
+						hostBuilder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING");
 					var httpClientBaseAddress =
-						hostBuilder.Configuration.GetValue<string>("RMQ-PUBLISHER-HTTP-CLIENT-BASE-ADDRESS");
+						hostBuilder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS");
 
 					services.AddHttpClient(httpClientName, x =>
 					{
@@ -34,6 +34,10 @@ namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 					{
 						config.HttpClientName = httpClientName;
 						config.HttpClientBaseAddress = httpClientBaseAddress;
+					});					
+					services.Configure<AuthConfig>(config =>
+					{
+						config.AuthToken = hostBuilder.Configuration.GetValue<string>("AUTH_TOKEN");
 					});
 				})
 				.Build();

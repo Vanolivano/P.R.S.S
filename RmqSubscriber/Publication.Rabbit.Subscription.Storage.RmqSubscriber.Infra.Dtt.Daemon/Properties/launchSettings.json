@@ -6,7 +6,6 @@
       "applicationUrl": "https://localhost:7242;http://localhost:5242",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "RABBIT_MQ_EXCHANGE_NAME_STRING": "amq.direct",
         "RABBIT_MQ_CONNECTION_STRING": "amqp://guest:guest@localhost:5672"
       }
     }

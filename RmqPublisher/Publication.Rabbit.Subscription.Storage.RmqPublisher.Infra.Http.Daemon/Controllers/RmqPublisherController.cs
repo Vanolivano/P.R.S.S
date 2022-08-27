@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.Services;
+using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Authorizers.Bearer;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Mappers;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto;
 
@@ -15,16 +16,19 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 	{
 		private readonly ILogger<RmqPublisherController> _logger;
 		private readonly IRmqPublisherService _publisherService;
+		private readonly IBearerAuthorizer _bearerAuthorizer;
 		private readonly IValidator<PersonDto> _validator;
 
 		public RmqPublisherController(
-			ILogger<RmqPublisherController> logger,
+			IValidator<PersonDto> validator,
+			IBearerAuthorizer bearerAuthorizer,
 			IRmqPublisherService publisherService,
-			IValidator<PersonDto> validator)
+			ILogger<RmqPublisherController> logger)
 		{
 			_logger = logger;
 			_publisherService = publisherService;
 			_validator = validator;
+			_bearerAuthorizer = bearerAuthorizer;
 		}
 
 		[HttpPost]
@@ -33,6 +37,13 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 		{
 			try
 			{
+				var authResult = _bearerAuthorizer.Authorize(Request);
+
+				if (authResult.Succeeded == false)
+				{
+					return StatusCode(authResult.ErrorData.ErrorCode, authResult.ErrorData.ErrorMessage);
+				}
+
 				var validationResult = _validator.Validate(dto);
 
 				if (validationResult.IsValid == false)
@@ -48,7 +59,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 				{
 					return StatusCode(result.ErrorData.ErrorCode, result.ErrorData.ErrorMessage);
 				}
-				
+
 				_logger.LogInformation($"{nameof(RmqPublisherController)} has successfully sent the data.");
 				return new OkObjectResult(result.Succeeded);
 			}
