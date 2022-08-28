@@ -29,8 +29,6 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 
 			var app = builder.Build();
 
-			app.UseHttpsRedirection();
-
 			app.MapControllers();
 
 			app.Run();
