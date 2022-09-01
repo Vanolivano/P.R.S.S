@@ -1,22 +1,20 @@
 version: '3.4'
 
 services:
-  rmq-publisher:
-    container_name: rmq-publisher
-    image: publicationrabbitsubscriptionstoragermqsubscriberinfradttdaemon:dev
+  prss.rmqpublisher.infra.http.daemon:
+    image: prssrmqpublisherinfrahttpdaemon:dev
+    container_name: PRSS.RmqPublisher.Infra.Http.Daemon
     build:
-      context: .
-      dockerfile: "C:/Publication.Rabbit.Subscription.Storage"
+      context: ./src/RmqPublisher/Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
+      dockerfile: Dockerfile
+    ports:
+      - "5047:5047"
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_URLS: "http://+:80"
+      ASPNETCORE_URLS: "http://+:5047"
       DOTNET_USE_POLLING_FILE_WATCHER: 1
       NUGET_PACKAGES: "/root/.nuget/fallbackpackages2"
       NUGET_FALLBACK_PACKAGES: "/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2"
       RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
       AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
-    ports:
-      - "8080:80"
-
-#    restart: always
-#    network_mode: "host"  
+    restart: always

@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RmqPublisher", "RmqPublisher", "{116A8900-2C45-4388-936C-F6CD211E0E17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Facade", "Facade", "{180AEA2E-0223-4C88-800B-2480CAB87022}"
@@ -25,38 +28,39 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B5F4F3C8-4B13-472D-894D-3CED68CD6A52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{5BB742CA-5F90-4E4B-BE9A-D86081F67733}"
-ProjectSection(SolutionItems) = preProject
-	docker-compose.p-r-s-s.yml = docker-compose.p-r-s-s.yml
-	Dockerfile = Dockerfile
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.ConsoleInput", "src\Publication.Rabbit.Subscription.Storage.ConsoleInput\Publication.Rabbit.Subscription.Storage.ConsoleInput.csproj", "{FD0A6A8D-130F-4904-882D-25CE3516AD87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.ConsoleInput", "src\Publication.Rabbit.Subscription.Storage.ConsoleInput\Publication.Rabbit.Subscription.Storage.ConsoleInput.csproj", "{FD0A6A8D-130F-4904-882D-25CE3516AD87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.csproj", "{1496C210-14D0-4F29-88AC-3BB197704D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.csproj", "{1496C210-14D0-4F29-88AC-3BB197704D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj", "{45454DBD-E38F-4874-AF5C-B610CC54ABB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj", "{45454DBD-E38F-4874-AF5C-B610CC54ABB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon.csproj", "{72DD83C1-1A13-4009-A519-7299529FF0F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRSS.Storage.RmqSubscriber.Infra.Dtt.Daemon", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon\PRSS.Storage.RmqSubscriber.Infra.Dtt.Daemon.csproj", "{72DD83C1-1A13-4009-A519-7299529FF0F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.csproj", "{9A61C609-7161-4217-9C06-A5CB46DF98F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.csproj", "{9A61C609-7161-4217-9C06-A5CB46DF98F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.csproj", "{EB79FBC3-475A-4511-8363-E6AEA49EB8DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.csproj", "{EB79FBC3-475A-4511-8363-E6AEA49EB8DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj", "{2079DB2E-B62D-48EA-9095-10EA58DFE85C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj", "{2079DB2E-B62D-48EA-9095-10EA58DFE85C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto.csproj", "{8BF936C7-F6DD-446C-ABC3-A45EAD507C02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto.csproj", "{8BF936C7-F6DD-446C-ABC3-A45EAD507C02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.csproj", "{E920FCE1-224F-4B6F-BF44-2846114FA685}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRSS.RmqPublisher.Infra.Http.Daemon", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon\PRSS.RmqPublisher.Infra.Http.Daemon.csproj", "{E920FCE1-224F-4B6F-BF44-2846114FA685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.csproj", "{EBE84BA0-F669-400C-924B-903AF155446F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.csproj", "{EBE84BA0-F669-400C-924B-903AF155446F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain\Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.csproj", "{BF3B090B-A375-4943-BB4E-E8CF45D12696}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain\Publication.Rabbit.Subscription.Storage.RmqPublisher.Domain.csproj", "{BF3B090B-A375-4943-BB4E-E8CF45D12696}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services.csproj", "{4A924D22-452F-43D1-A469-F4712B87CBD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services", "src\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services.csproj", "{4A924D22-452F-43D1-A469-F4712B87CBD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.Models", "src\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj", "{6047BD1A-606A-4464-A727-4E19575CA340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.Models", "src\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj", "{6047BD1A-606A-4464-A727-4E19575CA340}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dev.Tools", "src\Common\Dev.Tools\Dev.Tools.csproj", "{95AFDECB-0C02-46EA-8975-950131A53E85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dev.Tools", "src\Common\Dev.Tools\Dev.Tools.csproj", "{95AFDECB-0C02-46EA-8975-950131A53E85}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FFC53517-813B-43AA-966A-A0D272BB6CE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +124,13 @@ Global
 		{95AFDECB-0C02-46EA-8975-950131A53E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95AFDECB-0C02-46EA-8975-950131A53E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95AFDECB-0C02-46EA-8975-950131A53E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{180AEA2E-0223-4C88-800B-2480CAB87022} = {116A8900-2C45-4388-936C-F6CD211E0E17}
@@ -144,5 +155,8 @@ Global
 		{4A924D22-452F-43D1-A469-F4712B87CBD7} = {9F40D015-0F6C-41F1-BB85-B65A2C0F17FB}
 		{6047BD1A-606A-4464-A727-4E19575CA340} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{95AFDECB-0C02-46EA-8975-950131A53E85} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F468455E-197D-40D8-A851-8DA860A7DB1A}
 	EndGlobalSection
 EndGlobal

@@ -1,26 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <DockerfileContext>..\..</DockerfileContext>
+        <DockerfileContext>..\..\..</DockerfileContext>
+        <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.2.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.csproj" />
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services.csproj" />
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Dockerfile" />
     </ItemGroup>
 
 </Project>
