@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  rmq-publisher:
+    container_name: rmq-publisher
+    image: publicationrabbitsubscriptionstoragermqsubscriberinfradttdaemon:dev
+    build:
+      context: .
+      dockerfile: "C:/Publication.Rabbit.Subscription.Storage"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:80"
+      DOTNET_USE_POLLING_FILE_WATCHER: 1
+      NUGET_PACKAGES: "/root/.nuget/fallbackpackages2"
+      NUGET_FALLBACK_PACKAGES: "/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2"
+      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
+      AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
+    ports:
+      - "8080:80"
+
+#    restart: always
+#    network_mode: "host"  

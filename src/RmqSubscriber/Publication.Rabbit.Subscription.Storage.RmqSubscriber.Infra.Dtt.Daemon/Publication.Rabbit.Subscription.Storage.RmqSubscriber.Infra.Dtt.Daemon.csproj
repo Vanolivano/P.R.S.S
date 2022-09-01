@@ -16,4 +16,9 @@
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Dockerfile" />
+      <None Remove=".dockerignore" />
+    </ItemGroup>
+
 </Project>

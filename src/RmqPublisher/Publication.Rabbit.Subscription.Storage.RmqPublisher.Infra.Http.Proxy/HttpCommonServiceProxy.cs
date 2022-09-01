@@ -69,7 +69,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 			}
 			catch (Exception exception)
 			{
-				_logger.LogError($"Error while sending http request. Reason: {exception.Message}.");
+				_logger.LogError($"Error while sending http request. Reason: {exception.Message}.", exception);
 				return SuccessDataBuilder.BuildError(exception);
 			}
 		}
