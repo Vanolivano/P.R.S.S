@@ -12,9 +12,21 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5047"
-      DOTNET_USE_POLLING_FILE_WATCHER: 1
-      NUGET_PACKAGES: "/root/.nuget/fallbackpackages2"
-      NUGET_FALLBACK_PACKAGES: "/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2"
       RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
       AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
+    restart: always
+    
+    
+  prss.rmqsubscriber.infra.dtt.daemon:
+    image: prssrmqsubscriberinfradttdaemon:dev
+    container_name: PRSS.RmqSubscriber.Infra.Dtt.Daemon
+    build:
+      context: ./src/RmqSubscriber/Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
+      dockerfile: Dockerfile
+    ports:
+      - "5048:5048"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5048"
+      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
     restart: always

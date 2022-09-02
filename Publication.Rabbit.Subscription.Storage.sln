@@ -38,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscrip
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj", "{45454DBD-E38F-4874-AF5C-B610CC54ABB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRSS.Storage.RmqSubscriber.Infra.Dtt.Daemon", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon\PRSS.Storage.RmqSubscriber.Infra.Dtt.Daemon.csproj", "{72DD83C1-1A13-4009-A519-7299529FF0F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRSS.RmqSubscriber.Infra.Dtt.Daemon", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon\PRSS.RmqSubscriber.Infra.Dtt.Daemon.csproj", "{72DD83C1-1A13-4009-A519-7299529FF0F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Facade.csproj", "{9A61C609-7161-4217-9C06-A5CB46DF98F4}"
 EndProject
@@ -61,6 +61,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dev.Tools", "src\Common\Dev.Tools\Dev.Tools.csproj", "{95AFDECB-0C02-46EA-8975-950131A53E85}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FFC53517-813B-43AA-966A-A0D272BB6CE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebInput", "WebInput", "{80038217-E441-45FD-AB3B-A3918F89A685}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.WebInput", "src\WebInput\Publication.Rabbit.Subscription.Storage.WebInput\Publication.Rabbit.Subscription.Storage.WebInput.csproj", "{0FC76430-9EFA-4B03-95D3-3AA316847907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +132,10 @@ Global
 		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFC53517-813B-43AA-966A-A0D272BB6CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +163,7 @@ Global
 		{4A924D22-452F-43D1-A469-F4712B87CBD7} = {9F40D015-0F6C-41F1-BB85-B65A2C0F17FB}
 		{6047BD1A-606A-4464-A727-4E19575CA340} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{95AFDECB-0C02-46EA-8975-950131A53E85} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
+		{0FC76430-9EFA-4B03-95D3-3AA316847907} = {80038217-E441-45FD-AB3B-A3918F89A685}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F468455E-197D-40D8-A851-8DA860A7DB1A}

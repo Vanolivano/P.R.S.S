@@ -2,6 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..\..</DockerfileContext>
+        <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <RootNamespace>PRSS.Storage.RmqSubscriber.Infra.Dtt.Daemon</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

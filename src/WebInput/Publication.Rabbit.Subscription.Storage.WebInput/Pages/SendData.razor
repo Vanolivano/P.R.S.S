@@ -1,0 +1,73 @@
+﻿@page "/"
+
+<PageTitle>Person input</PageTitle>
+
+@using Publication.Rabbit.Subscription.Storage.WebInput.Data
+@using Publication.Rabbit.Subscription.Storage.Models
+@using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade
+@inject IRmqPublisherClient _rmqPublisherClient
+
+<h1>Person input</h1>
+
+<p>This component demonstrates input and sending data to another service.</p>
+<EditForm Model="_personModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <div class="form-group">
+        <label for="nameId">Name</label>
+        <input @bind="_personModel.Name" type="text" class="form-control" id="nameId" placeholder="Enter name">
+    </div>
+
+    <div class="form-group">
+        <label for="ageId">Age</label>
+        <input @bind="_personModel.Age" type="number" class="form-control" id="ageId" placeholder="Enter age">
+    </div>
+
+    <div class="form-group">
+        <label for="genderId">Gender</label>
+        <InputSelect @bind-Value="_personModel.Gender" id="genderId" class="form-control">
+            @foreach (var gender in Enum.GetValues<Gender>())
+            {
+                <option value="@gender">@gender</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group">
+        <label for="birthDateId">BirthDate</label>
+        <input @bind="_personModel.BirthDate" @bind:format="yyyy-MM-dd" type="date" class="form-control" id="birthDateId" placeholder="Enter age">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    @if (ErrorMessage != null)
+    {
+        <p class="blazor-error-boundary">
+            @ErrorMessage
+        </p>
+    }
+</EditForm>
+
+@code {
+    private readonly PersonModel _personModel = new();
+    private string ErrorMessage { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _personModel.BirthDate = DateTime.Today;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        ErrorMessage = null;
+        var result = await _rmqPublisherClient.SendData(_personModel);
+
+        if (result.ErrorData != null)
+        {
+            ErrorMessage = result.ErrorData.ErrorMessage;
+        }
+    }
+
+}
