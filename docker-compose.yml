@@ -3,7 +3,7 @@ version: '3.4'
 services:
   prss.rmqpublisher.infra.http.daemon:
     image: prssrmqpublisherinfrahttpdaemon:dev
-    container_name: PRSS.RmqPublisher.Infra.Http.Daemon
+    container_name: rmq-publisher-http
     build:
       context: ./src/RmqPublisher/Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
       dockerfile: Dockerfile
@@ -12,14 +12,14 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5047"
-      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
+      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@rabbit-mq:5672"
       AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
     restart: always
     
     
   prss.rmqsubscriber.infra.dtt.daemon:
     image: prssrmqsubscriberinfradttdaemon:dev
-    container_name: PRSS.RmqSubscriber.Infra.Dtt.Daemon
+    container_name: rmq-subscriber-dtt
     build:
       context: ./src/RmqSubscriber/Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
       dockerfile: Dockerfile
@@ -28,5 +28,18 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5048"
-      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@host.docker.internal:5672"
+      RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@rabbit-mq:5672"
+    restart: always
+
+
+  rabbit.mq.service:
+    image: rabbitmq:3
+    container_name: rabbit-mq
+    ports: 
+      - "4672:5672"
+      - "4671:5671"
+      - "3369:4369"
+      - "24672:25672"
+      - "14692:15692"
+      - "14691:15691"
     restart: always
