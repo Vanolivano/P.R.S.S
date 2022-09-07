@@ -5,6 +5,7 @@ using Dev.Tools.Configs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Polly;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon.Handlers;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto;
 using RabbitMQ.Client;
@@ -14,39 +15,48 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
 {
 	public class SubscribeHostedService : IHostedService
 	{
-		private readonly IModel _channel;
-		private readonly IConnection _connection;
+		private IModel _channel;
+		private IConnection _connection;
+		private const int RetryCount = 10;
+		private readonly ConnectionFactory _connectionFactory;
 		private readonly ILogger<SubscribeHostedService> _logger;
 		private readonly IRmqSubscriberHandler _rmqSubscriberHandler;
 
 		public SubscribeHostedService(
 			IOptions<RabbitConfig> rabbitConfig,
-			ILogger<SubscribeHostedService> logger ,
+			ILogger<SubscribeHostedService> logger,
 			IRmqSubscriberHandler rmqSubscriberHandler)
 		{
 			_logger = logger;
 			_rmqSubscriberHandler = rmqSubscriberHandler;
-			var factory = new ConnectionFactory
+			_connectionFactory = new ConnectionFactory
 			{
 				Uri = new Uri(rabbitConfig.Value.ConnectionString)
 			};
-
-			_connection = factory.CreateConnection();
-			_channel = _connection.CreateModel();
 		}
 
 		public Task StartAsync(CancellationToken cancellationToken)
 		{
-			try
-			{
-				Subscribe();
-			}
-			catch (Exception exception)
-			{
-				_logger.LogError($"The error occurred during the subscription. Reason: {exception.Message}");
-			}
+			var policy = Policy.Handle<Exception>().WaitAndRetry(
+				RetryCount,
+				retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+				OnRetry);
 
+			policy.Execute(Handle);
 			return Task.CompletedTask;
+
+			
+			void OnRetry(Exception ex, TimeSpan time)
+			{
+				_logger.LogWarning("Could not subscribe in {0}. Reason: {1}", time, ex.Message);
+			}
+		}
+
+		private void Handle()
+		{
+			_connection = _connectionFactory.CreateConnection();
+			_channel = _connection.CreateModel();
+			Subscribe();
 		}
 
 		public Task StopAsync(CancellationToken cancellationToken)

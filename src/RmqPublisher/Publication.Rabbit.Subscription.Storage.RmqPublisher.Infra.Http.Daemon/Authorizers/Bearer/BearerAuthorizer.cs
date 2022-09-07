@@ -23,7 +23,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 			    || authToken.StartsWith("Bearer ") == false
 			    || authToken.Contains(_authConfig.AuthToken) == false)
 			{
-				return SuccessDataBuilder.BuildError("Authorization failed", 400);
+				return SuccessDataBuilder.BuildError($"Authorization failed. Auth Token: {authToken}. ", 400);
 			}
 
 			return SuccessDataBuilder.BuildSuccess();

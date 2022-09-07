@@ -5,6 +5,7 @@
 @using Publication.Rabbit.Subscription.Storage.WebInput.Data
 @using Publication.Rabbit.Subscription.Storage.Models
 @using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade
+@using Dev.Tools.Results
 @inject IRmqPublisherClient _rmqPublisherClient
 
 <h1>Person input</h1>
@@ -42,32 +43,36 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 
 
-    @if (ErrorMessage != null)
+    @if (Result?.ErrorData != null)
     {
         <p class="blazor-error-boundary">
-            @ErrorMessage
+            @Result.ErrorData.ErrorMessage
+        </p>
+    }
+    @if (Result?.Succeeded == true)
+    {
+        <p class="alert-info align-content-center">
+            Data has been sent successfully.
         </p>
     }
 </EditForm>
 
 @code {
     private readonly PersonModel _personModel = new();
-    private string ErrorMessage { get; set; }
+    private ISuccessData Result { get; set; }
 
     protected override void OnInitialized()
     {
-        _personModel.BirthDate = DateTime.Today;
+        _personModel.BirthDate = new DateTime(2002, 01, 01);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Result = null;
     }
 
     private async Task HandleValidSubmit()
     {
-        ErrorMessage = null;
-        var result = await _rmqPublisherClient.SendData(_personModel);
-
-        if (result.ErrorData != null)
-        {
-            ErrorMessage = result.ErrorData.ErrorMessage;
-        }
+        Result = await _rmqPublisherClient.SendData(_personModel);
     }
-
 }

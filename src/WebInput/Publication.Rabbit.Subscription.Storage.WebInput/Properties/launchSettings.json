@@ -12,9 +12,12 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7261;http://localhost:5261",
+      "applicationUrl": "http://localhost:5261",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING": "rmq-publisher-http-client",
+        "RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS": "http://localhost:5047",
+        "AUTH_TOKEN": "784aae1c1abb4aa3914f42a81e893ed2"
       }
     }
   }

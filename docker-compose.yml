@@ -32,6 +32,23 @@ services:
     restart: always
 
 
+  prss.web.input:
+    image: prsswebinput:dev
+    container_name: prss-web-input
+    build:
+      context: ./src/WebInput/Publication.Rabbit.Subscription.Storage.WebInput
+      dockerfile: Dockerfile
+    ports:
+      - "5049:5049"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5049"
+      RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING: "rmq-publisher-http-client"
+      RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS: "http://rmq-publisher-http:5047"
+      AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
+    restart: always
+
+
   rabbit.mq.service:
     image: rabbitmq:3
     container_name: rabbit-mq
