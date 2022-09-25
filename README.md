@@ -1,36 +1,42 @@
 # P.R.S.S - Publication.Rabbit.Subscription.Storage
-Целью проекта является демонстрация знаний и навыков в области разработки крос платформенных приложений на микросервисной архитектуре.
-Проект в данный момент состоит из 5 контейнеров web-input, rmq-publisher, rmq-subscriber, rabbitMq, console-input.
+  The purpose of the project is to demonstrate the knowledge and skills of developing cross-platform applications on a micro-service architecture on .net, c#.
 
-web-input-container: 
-  blazor app on .NET6
-  web page for input person data
+## Architecture overview
+  This reference application is cross-platform at the server and client-side, thanks to .NET 6 services capable of running on Linux or Windows containers depending on your Docker host. The architecture proposes a microservice oriented architecture implementation with multiple autonomous microservices (each one owning its own data/db) using HTTP as the communication protocol between the client apps and the microservices and using AMQP as the communication protocol between microservices.
+
+## Diagram of modules and interactions in the application
+  <img src="img/apps.svg">
+
+#### The solution consists of 4 modules: web-input, rmq-publisher, rmq-subscriber, console-input.
+#### Each module is deployed in a separate container. The message broker RabbitMQ is also deployed in a separate container.
+
+## Web-input-module: 
+  Blazor app on .NET6, single web page for input data.
   
-console-input-container:
-    console app on .NET6
-    it was used for fast input Person data for testing other services
+## Console-input-module:
+  Console app on .NET6, can be used for fast data input, used during testing of other services.
 
-rmq-publisher-container:
-    it can receive and validate data by http and send it to rabbitMQ
-    it consist of several projects on .NET6. 
+## Rmq-publisher-module:
+  The module consist of several projects on .NET 6: it accepts and validates data by http and sends it to RabbitMq.
 
-rmq-subscriber-container:
-it can receive data from rabbit.
+## Rmq-subscriber-module:
+The module accepts data from RabbitMq and it could do something else.
 
-rabbitMq-container:
-it contains a rabbitMQ instance
+### Rmq-subscriber and rmq-publisher modules have a similar architecture for ease of understanding, it can be represented in several parts: FACADE, INFRA, DOMAIN, BL.
 
+## FACADE:
+  It contains service interfaces for interacting with the module, argument interfaces and their default implementations.
 
-Applications rmq-subscriber and rmq-publisher have a similar architecture for ease of understanding,
-this can be presented as several parts: FACADE, INFRA, DOMAIN, BL.
+## INFRA (infrastructure):
+  #### Proxy contains implementations of facade interfaces.
+  #### Dto contains dto models.
+  #### Daemon - program entry point, http api controllers, validations, app settings.
 
-FACADE - it contains interfaces for interacting with the app, argument interfaces and their default implementations.
+## DOMAIN: 
+  It contains core interfaces of logic of the module
 
-INFRA - it contains:
-Proxy - it contains implementations of facade interfaces.
-Dto - it contains dto models.
-Daemon - program entry point, http api controllers, validations, app setting.
+## BL:
+  It contains implementations of domain interfaces.
 
-DOMAIN - it contains core interfaces of logic of the app
-
-BL - it contains implementations of domain interfaces.
+## Diagram of the structure and connections in the module
+  <img src="img/modules.svg">
