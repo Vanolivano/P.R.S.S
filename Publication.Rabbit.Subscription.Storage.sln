@@ -60,11 +60,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscrip
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dev.Tools", "src\Common\Dev.Tools\Dev.Tools.csproj", "{95AFDECB-0C02-46EA-8975-950131A53E85}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FFC53517-813B-43AA-966A-A0D272BB6CE0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebInput", "WebInput", "{80038217-E441-45FD-AB3B-A3918F89A685}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.WebInput", "src\WebInput\Publication.Rabbit.Subscription.Storage.WebInput\Publication.Rabbit.Subscription.Storage.WebInput.csproj", "{0FC76430-9EFA-4B03-95D3-3AA316847907}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F0E1B61-0CB0-44E2-9E0A-788579184EFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RmqSubscriber", "RmqSubscriber", "{8E5B256C-CCD6-4F78-B586-E4BE548549CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db.csproj", "{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL.csproj", "{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,6 +142,14 @@ Global
 		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FC76430-9EFA-4B03-95D3-3AA316847907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +178,9 @@ Global
 		{6047BD1A-606A-4464-A727-4E19575CA340} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{95AFDECB-0C02-46EA-8975-950131A53E85} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{0FC76430-9EFA-4B03-95D3-3AA316847907} = {80038217-E441-45FD-AB3B-A3918F89A685}
+		{8E5B256C-CCD6-4F78-B586-E4BE548549CF} = {6F0E1B61-0CB0-44E2-9E0A-788579184EFC}
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6} = {8E5B256C-CCD6-4F78-B586-E4BE548549CF}
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86} = {8E5B256C-CCD6-4F78-B586-E4BE548549CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F468455E-197D-40D8-A851-8DA860A7DB1A}
