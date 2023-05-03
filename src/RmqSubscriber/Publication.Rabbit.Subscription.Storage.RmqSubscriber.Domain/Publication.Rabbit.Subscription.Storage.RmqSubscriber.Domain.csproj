@@ -4,4 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj" />
+    </ItemGroup>
+
 </Project>

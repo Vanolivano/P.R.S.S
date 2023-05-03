@@ -1,7 +1,10 @@
-﻿namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Services
+﻿using System.Threading.Tasks;
+using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Models;
+
+namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Services
 {
 	public interface IRmqSubscriberService
 	{
-		void Do();
+		Task SavePersonAsync(IPerson person);
 	}
 }

@@ -17,6 +17,8 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Common\Dev.Tools\Dev.Tools.csproj" />
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Dto.csproj" />
+        <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db.csproj" />
+        <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL.csproj" />
     </ItemGroup>
 
     <ItemGroup>

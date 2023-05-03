@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Repositories;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db.Repositories;
 
-public class MongoRepository<T> : IMongoRepository<T> where T : class
+public class MongoRepository<T> where T : class
 {
     private readonly IMongoCollection<T> _collection;
 
