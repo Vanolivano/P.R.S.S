@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -36,9 +37,19 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
 
             _logger.LogInformation("[Person] {0}", personDto);
 
-			await _rmqSubscriberService.SavePersonAsync(personDto.ToModel());
+            try
+            {
+                await _rmqSubscriberService.SavePersonAsync(personDto.ToModel());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error occured while save person. " +
+                "Reason {0}", ex.Message);
+            }
+            _logger.LogInformation("[Person] {0} has been saved to mongodb store.", personDto);
 
             ((EventingBasicConsumer)model).Model.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
+            _logger.LogInformation("RabbitMq has been acked.");
         }
     }
 }

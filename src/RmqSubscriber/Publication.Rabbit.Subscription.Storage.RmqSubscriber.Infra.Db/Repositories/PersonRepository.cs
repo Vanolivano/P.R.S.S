@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dev.Tools.Configs;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Models;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Domain.Repositories;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db.Mappers;
@@ -10,17 +13,22 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db;
 
 public class PersonRepository : IPersonRepository
 {
+    private const string DatabaseName = "databasename";
+    private const string CollectionName = "PersonModels";
     private readonly MongoRepository<PersonModel> _mongoRepository;
-    public PersonRepository()
+    private readonly ILogger<PersonRepository> _logger;
+    public PersonRepository(IOptions<MongoDbConfig> mongoDbConfig, ILogger<PersonRepository> logger)
     {
         _mongoRepository = new MongoRepository<PersonModel>(
-            "mongodb://root:rootpassword@127.0.0.1:27017/",
-             "databasename",
-              "personCollectionName");
+            mongoDbConfig.Value.ConnectionString,
+            DatabaseName,
+            CollectionName);
+        _logger = logger;
     }
 
     public Task CreateAsync(IPerson entity)
     {
+        _logger.LogInformation($"{nameof(CreateAsync)} has started.");
         return _mongoRepository.CreateAsync(entity.ToDbModel());
     }
 

@@ -12,7 +12,7 @@ public static class PersonMapperExtensions
             Name = person.Name,
             Age = person.Age,
             BirthDate = person.BirthDate,
-            Gender = 18
+            Gender = person.Gender
         };
     }
 }

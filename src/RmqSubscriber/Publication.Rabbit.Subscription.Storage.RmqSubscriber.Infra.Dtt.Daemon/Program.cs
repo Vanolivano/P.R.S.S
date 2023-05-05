@@ -18,6 +18,11 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Daemon
 			{
 				config.ConnectionString = builder.Configuration.GetValue<string>("RABBIT_MQ_CONNECTION_STRING");
 			});
+			builder.Services.Configure<MongoDbConfig>(config =>
+			{
+				config.ConnectionString = builder.Configuration.GetValue<string>("MONGODB_DB_CONNECTION_STRING");
+			});
+			
 			builder.Services.AddRmqSubscriberHandler();
 			builder.Services.AddRmqSubscriberService();
 			builder.Services.AddPersonMongoRepository();

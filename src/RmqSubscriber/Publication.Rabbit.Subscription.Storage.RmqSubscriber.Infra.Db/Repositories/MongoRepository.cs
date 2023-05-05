@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -16,9 +17,9 @@ public class MongoRepository<T> where T : class
         _collection = database.GetCollection<T>(collectionName);
     }
 
-    public async Task CreateAsync(T entity)
+    public Task CreateAsync(T entity)
     {
-        await _collection.InsertOneAsync(entity);
+        return _collection.InsertOneAsync(entity);
     }
 
     public async Task<ICollection<T>> GetAllAsync()

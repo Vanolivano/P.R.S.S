@@ -29,6 +29,7 @@ services:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5048"
       RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@rabbit-mq:5672"
+      MONGODB_DB_CONNECTION_STRING: "mongodb://root:rootpassword@mongodb_container:27017"
     restart: always
 
 

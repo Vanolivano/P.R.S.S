@@ -18,7 +18,8 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 		private readonly RabbitConfig _rabbitConfig;
 		private readonly ILogger<DttRmqSubscriberServiceProxy> _logger;
 
-		public DttRmqSubscriberServiceProxy(IOptions<RabbitConfig> rabbitConfig,
+		public DttRmqSubscriberServiceProxy(
+			IOptions<RabbitConfig> rabbitConfig,
 			ILogger<DttRmqSubscriberServiceProxy> logger)
 		{
 			_logger = logger;
