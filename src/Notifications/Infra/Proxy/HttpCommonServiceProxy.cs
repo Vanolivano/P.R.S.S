@@ -11,40 +11,40 @@ using Dev.Tools.Results.Builders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
+namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 {
-	internal sealed partial class HttpRmqPublisherServiceProxy
+	internal sealed partial class HttpNotificationServiceProxy
 	{
 		private const string MediaType = "application/json";
 		private const string RequestPrefix = "api/v1";
-        private const string ControllerName = "rmq-publisher";
+        private const string NotificationControllerName = "notifications";
 
         private string AuthToken { get; }
 		private readonly HttpClient _httpClient;
-		private readonly ILogger<HttpRmqPublisherServiceProxy> _logger;
+		private readonly ILogger<HttpNotificationServiceProxy> _logger;
 
 
-		public HttpRmqPublisherServiceProxy(
+		public HttpNotificationServiceProxy(
 			IOptions<HttpClientConfig> config,
 			IOptions<AuthConfig> authConfig,
 			IHttpClientFactory httpClientFactory,
-			ILogger<HttpRmqPublisherServiceProxy> logger)
+			ILogger<HttpNotificationServiceProxy> logger)
 		{
 			_httpClient = httpClientFactory.CreateClient(config.Value.HttpClientName);
 			AuthToken = authConfig.Value.AuthToken;
 			_logger = logger;
 		}
 
-		private static HttpRequestMessage CreateHttpRequestMessage<T>(
+		private static HttpRequestMessage CreateHttpRequestMessage(
 			HttpMethod method,
 			string requestUri,
-			T dto,
+			string message,
 			string authToken)
 		{
 			var request = new HttpRequestMessage(method, requestUri)
 			{
 				Content = new StringContent(
-					JsonSerializer.Serialize(dto),
+					message,
 					Encoding.UTF8,
 					MediaType)
 			};
@@ -82,8 +82,8 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 			return ErrorDataBuilder.BuildErrorData(errorMessage, (int) response.StatusCode);
 		}
 
-		private static string GetRmqPublisherUri(string operation, Guid? id = null) =>
-			GetRequestUri(ControllerName, operation, id);
+		private static string GetNotificationUri(string operation, Guid? id = null) =>
+			GetRequestUri(NotificationControllerName, operation, id);
 
 		private static string GetRequestUri(string controller, string operation, Guid? id)
 		{
