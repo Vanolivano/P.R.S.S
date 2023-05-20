@@ -5,8 +5,10 @@
 @using Publication.Rabbit.Subscription.Storage.WebInput.Data
 @using Publication.Rabbit.Subscription.Storage.Models
 @using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade
+@using Publication.Rabbit.Subscription.Storage.Notifications.Facade
 @using Dev.Tools.Results
 @inject IRmqPublisherClient _rmqPublisherClient
+@inject INotificationService _notificationClient
 
 <h1>Person input</h1>
 
@@ -74,5 +76,7 @@
     private async Task HandleValidSubmit()
     {
         Result = await _rmqPublisherClient.SendData(_personModel);
+        if(Result.Succeeded == false) return;
+        Result = await _notificationClient.PushMessageAsync("Data has been sended to RmqPublisher from WebInput");
     }
 }

@@ -11,6 +11,9 @@
       <ProjectReference Include="..\..\Common\Publication.Rabbit.Subscription.Storage.Models\Publication.Rabbit.Subscription.Storage.Models.csproj" />
       <ProjectReference Include="..\..\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade\Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.csproj" />
       <ProjectReference Include="..\..\RmqPublisher\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj" />
+      <ProjectReference Include="..\..\Notifications\Facade\Publication.Rabbit.Subscription.Storage.Notifications.Facade.csproj" />
+      <ProjectReference Include="..\..\Notifications\Infra\Proxy\Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy.csproj" />
+
     </ItemGroup>
 
 </Project>

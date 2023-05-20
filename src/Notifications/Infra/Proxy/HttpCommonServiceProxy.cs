@@ -30,7 +30,7 @@ namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 			IHttpClientFactory httpClientFactory,
 			ILogger<HttpNotificationServiceProxy> logger)
 		{
-			_httpClient = httpClientFactory.CreateClient(config.Value.HttpClientName);
+			_httpClient = httpClientFactory.CreateClient(Constants.NotificationsService);
 			AuthToken = authConfig.Value.AuthToken;
 			_logger = logger;
 		}
@@ -44,7 +44,7 @@ namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 			var request = new HttpRequestMessage(method, requestUri)
 			{
 				Content = new StringContent(
-					message,
+					JsonSerializer.Serialize(message),
 					Encoding.UTF8,
 					MediaType)
 			};

@@ -46,6 +46,22 @@ services:
       ASPNETCORE_URLS: "http://+:5049"
       RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING: "rmq-publisher-http-client"
       RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS: "http://rmq-publisher-http:5047"
+      NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS: "http://prss-notification-http:5211"
+      AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
+    restart: always
+
+
+  prss.notification.http:
+    image: prssnotificationhttp:dev
+    container_name: prss-notification-http
+    build:
+      context: ./src/Notifications/Infra/Daemon
+      dockerfile: Dockerfile
+    ports:
+      - "5211:5211"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5211"
       AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
     restart: always
 
