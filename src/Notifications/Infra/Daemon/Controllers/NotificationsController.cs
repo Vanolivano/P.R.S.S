@@ -1,7 +1,8 @@
 using System;
-using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Publication.Rabbit.Subscription.Storage.Notifications.Domain;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Controllers
 {
@@ -10,25 +11,25 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
     public class NotificationsController : ControllerBase
     {
         private readonly ILogger<NotificationsController> _logger;
-        // private readonly IRmqPublisherService _publisherService;
+        private readonly INotificationService _notificationService;
         // private readonly IBearerAuthorizer _bearerAuthorizer;
         // private readonly IValidator<PersonDto> _validator;
 
         public NotificationsController(
             // IValidator<PersonDto> validator,
             // IBearerAuthorizer bearerAuthorizer,
-            // IRmqPublisherService publisherService,
+            INotificationService notificationService,
             ILogger<NotificationsController> logger)
         {
             _logger = logger;
-            // _publisherService = publisherService;
+            _notificationService = notificationService;
             // _validator = validator;
             // _bearerAuthorizer = bearerAuthorizer;
         }
 
         [HttpPost]
         [Route("push-message")]
-        public ActionResult SendData([FromBody] string message)
+        public async Task<ActionResult> SendData([FromBody] string message)
         {
             try
             {
@@ -37,6 +38,13 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
                     _logger.LogWarning("message is null");
                 }
                 _logger.LogInformation(message);
+
+                var result = await _notificationService.HandleAsync(message);
+
+                if (result.Succeeded == false)
+                {
+                   return StatusCode(result.ErrorData.ErrorCode, result.ErrorData.ErrorMessage);
+                }
                 // var authResult = _bearerAuthorizer.Authorize(Request);
 
                 // if (authResult.Succeeded == false)
@@ -61,7 +69,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
                 // }
 
                 _logger.LogInformation($"{nameof(NotificationsController)} has successfully handled the data.");
-                return new OkResult();
+               return new OkObjectResult(result.Succeeded);
             }
             catch (Exception ex)
             {

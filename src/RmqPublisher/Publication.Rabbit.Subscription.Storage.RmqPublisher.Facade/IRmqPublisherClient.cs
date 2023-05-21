@@ -7,7 +7,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade
 {
 	public interface IRmqPublisherClient
 	{
-		public Task<ISuccessData> SendData(IPersonArgs args, CancellationToken cancellationToken = default);
+		Task<ISuccessData> SendData(IPersonArgs args, CancellationToken cancellationToken = default);
 	}
 }
 

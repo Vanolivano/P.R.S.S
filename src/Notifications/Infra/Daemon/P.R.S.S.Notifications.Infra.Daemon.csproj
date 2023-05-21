@@ -4,4 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Dev.Tools\Dev.Tools.csproj" />
+    <ProjectReference Include="..\..\BL\Publication.Rabbit.Subscription.Storage.Notifications.BL.csproj" />
+    <ProjectReference Include="..\Proxy\Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy.csproj" />
+  </ItemGroup>
 </Project>

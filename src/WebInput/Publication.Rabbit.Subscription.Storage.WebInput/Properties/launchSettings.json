@@ -18,7 +18,8 @@
         "RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING": "rmq-publisher-http-client",
         "RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS": "http://localhost:5047",
         "NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS": "http://localhost:5211",
-        "AUTH_TOKEN": "784aae1c1abb4aa3914f42a81e893ed2"
+        "AUTH_TOKEN": "784aae1c1abb4aa3914f42a81e893ed2",
+        "RABBIT_MQ_CONNECTION_STRING": "amqp://guest:guest@localhost:4672"
       }
     }
   }

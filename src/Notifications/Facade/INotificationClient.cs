@@ -4,7 +4,7 @@ using Dev.Tools.Results;
 
 namespace Publication.Rabbit.Subscription.Storage.Notifications.Facade;
 
-public interface INotificationService
+public interface INotificationClient
 {
     Task<ISuccessData> PushMessageAsync(string message, CancellationToken cancellationToken = default);
 }

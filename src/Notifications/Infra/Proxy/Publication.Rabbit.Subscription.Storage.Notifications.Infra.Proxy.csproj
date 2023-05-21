@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Publication.Rabbit.Subscription.Storage.Notifications.Domain.csproj" />
     <ProjectReference Include="..\..\..\Common\Dev.Tools\Dev.Tools.csproj" />
     <ProjectReference Include="..\..\Facade\Publication.Rabbit.Subscription.Storage.Notifications.Facade.csproj" />
     <ProjectReference Include="..\Dto\Publication.Rabbit.Subscription.Storage.Notifications.Infra.Dto.csproj" />

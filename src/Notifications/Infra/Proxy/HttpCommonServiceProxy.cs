@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 {
-	internal sealed partial class HttpNotificationServiceProxy
+	internal sealed partial class HttpNotificationClientProxy
 	{
 		private const string MediaType = "application/json";
 		private const string RequestPrefix = "api/v1";
@@ -21,14 +21,14 @@ namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 
         private string AuthToken { get; }
 		private readonly HttpClient _httpClient;
-		private readonly ILogger<HttpNotificationServiceProxy> _logger;
+		private readonly ILogger<HttpNotificationClientProxy> _logger;
 
 
-		public HttpNotificationServiceProxy(
+		public HttpNotificationClientProxy(
 			IOptions<HttpClientConfig> config,
 			IOptions<AuthConfig> authConfig,
 			IHttpClientFactory httpClientFactory,
-			ILogger<HttpNotificationServiceProxy> logger)
+			ILogger<HttpNotificationClientProxy> logger)
 		{
 			_httpClient = httpClientFactory.CreateClient(Constants.NotificationsService);
 			AuthToken = authConfig.Value.AuthToken;

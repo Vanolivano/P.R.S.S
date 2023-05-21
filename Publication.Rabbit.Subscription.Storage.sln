@@ -84,6 +84,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscrip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P.R.S.S.Notifications.Infra.Daemon", "src\Notifications\Infra\Daemon\P.R.S.S.Notifications.Infra.Daemon.csproj", "{E56A5C8B-D994-436D-97D8-DFB0D27D2392}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.Notifications.Domain", "src\Notifications\Domain\Publication.Rabbit.Subscription.Storage.Notifications.Domain.csproj", "{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +180,10 @@ Global
 		{E56A5C8B-D994-436D-97D8-DFB0D27D2392}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E56A5C8B-D994-436D-97D8-DFB0D27D2392}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E56A5C8B-D994-436D-97D8-DFB0D27D2392}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -216,6 +222,7 @@ Global
 		{48C116B2-48F5-4245-9A1F-9A6F7FCDD52F} = {34B9646F-E045-4082-BD27-A718D12430DE}
 		{41CFB9CD-3E69-4405-B1F5-62A7DCF4FB6A} = {34B9646F-E045-4082-BD27-A718D12430DE}
 		{E56A5C8B-D994-436D-97D8-DFB0D27D2392} = {34B9646F-E045-4082-BD27-A718D12430DE}
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F468455E-197D-40D8-A851-8DA860A7DB1A}

@@ -6,7 +6,7 @@ using Publication.Rabbit.Subscription.Storage.Notifications.Facade;
 
 namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 {
-    internal sealed partial class HttpNotificationServiceProxy : INotificationService
+    internal sealed partial class HttpNotificationClientProxy : INotificationClient
     {
         public async Task<ISuccessData> PushMessageAsync(string message, CancellationToken cancellationToken)
         {

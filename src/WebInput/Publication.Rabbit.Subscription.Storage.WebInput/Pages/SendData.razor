@@ -8,7 +8,7 @@
 @using Publication.Rabbit.Subscription.Storage.Notifications.Facade
 @using Dev.Tools.Results
 @inject IRmqPublisherClient _rmqPublisherClient
-@inject INotificationService _notificationClient
+@inject INotificationClient _notificationClient
 
 <h1>Person input</h1>
 
@@ -58,6 +58,8 @@
         </p>
     }
 </EditForm>
+
+<NotificationComponent />
 
 @code {
     private readonly PersonModel _personModel = new();
