@@ -15,24 +15,13 @@ builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddRmqPublisherClient();
+builder.Services.AddRmqPublisherClient(builder.Configuration);
 builder.Services.AddNotificationClient();
 builder.Services.AddNotificationHttpClient(builder.Configuration);
 builder.Services.AddNotificationSubscriber<NotificationReceiver>();
 
-var httpClientName =
-    builder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING");
-var httpClientBaseAddress =
-    builder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS");
-
-builder.Services.AddHttpClient(httpClientName, x => { x.BaseAddress = new Uri(httpClientBaseAddress); });
 builder.Services.Configure<RabbitConfig>(config =>
     config.ConnectionString = builder.Configuration.GetValue<string>("RABBIT_MQ_CONNECTION_STRING"));
-builder.Services.Configure<HttpClientConfig>(config =>
-{
-    config.HttpClientName = httpClientName;
-    config.HttpClientBaseAddress = httpClientBaseAddress;
-});
 builder.Services.Configure<AuthConfig>(config =>
 {
     config.AuthToken = builder.Configuration.GetValue<string>("AUTH_TOKEN");

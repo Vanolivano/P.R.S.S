@@ -22,7 +22,7 @@ public static class DependencyInjector
     public static void AddNotificationHttpClient(this IServiceCollection services, IConfiguration conf)
     {
         services.AddHttpClient(
-            Constants.NotificationsService,
+            Constants.NotificationsHttpClientName,
             httpClient =>
             {
                 httpClient.BaseAddress = new Uri(conf.GetValue<string>("NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS"));

@@ -30,7 +30,7 @@ namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 			IHttpClientFactory httpClientFactory,
 			ILogger<HttpNotificationClientProxy> logger)
 		{
-			_httpClient = httpClientFactory.CreateClient(Constants.NotificationsService);
+			_httpClient = httpClientFactory.CreateClient(Constants.NotificationsHttpClientName);
 			AuthToken = authConfig.Value.AuthToken;
 			_logger = logger;
 		}

@@ -25,12 +25,11 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
 
 
 		public HttpRmqPublisherServiceProxy(
-			IOptions<HttpClientConfig> config,
 			IOptions<AuthConfig> authConfig,
 			IHttpClientFactory httpClientFactory,
 			ILogger<HttpRmqPublisherServiceProxy> logger)
 		{
-			_httpClient = httpClientFactory.CreateClient(config.Value.HttpClientName);
+			_httpClient = httpClientFactory.CreateClient(Constants.RmqPublisherHttpClientName);
 			AuthToken = authConfig.Value.AuthToken;
 			_logger = logger;
 		}

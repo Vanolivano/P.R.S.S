@@ -18,23 +18,7 @@ namespace Publication.Rabbit.Subscription.Storage.ConsoleInput
 			using IHost host = Host.CreateDefaultBuilder(args)
 				.ConfigureServices((hostBuilder, services) =>
 				{
-					services.AddRmqPublisherClient();
-					
-					var httpClientName =
-						hostBuilder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING");
-					var httpClientBaseAddress =
-						hostBuilder.Configuration.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS");
-
-					services.AddHttpClient(httpClientName, x =>
-					{
-						x.BaseAddress = new Uri(httpClientBaseAddress);
-					});
-
-					services.Configure<HttpClientConfig>(config =>
-					{
-						config.HttpClientName = httpClientName;
-						config.HttpClientBaseAddress = httpClientBaseAddress;
-					});					
+					services.AddRmqPublisherClient(hostBuilder.Configuration);				
 					services.Configure<AuthConfig>(config =>
 					{
 						config.AuthToken = hostBuilder.Configuration.GetValue<string>("AUTH_TOKEN");

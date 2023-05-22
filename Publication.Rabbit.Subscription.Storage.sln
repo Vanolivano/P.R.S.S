@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
@@ -30,6 +30,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{5BB742CA-5F90-4E4B-BE9A-D86081F67733}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.dockerignore = .dockerignore
+		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+		script.bat = script.bat
+		script.sh = script.sh
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.csproj", "{1496C210-14D0-4F29-88AC-3BB197704D6D}"
@@ -62,15 +68,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebInput", "WebInput", "{80
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.WebInput", "src\WebInput\Publication.Rabbit.Subscription.Storage.WebInput\Publication.Rabbit.Subscription.Storage.WebInput.csproj", "{0FC76430-9EFA-4B03-95D3-3AA316847907}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6F0E1B61-0CB0-44E2-9E0A-788579184EFC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RmqSubscriber", "RmqSubscriber", "{8E5B256C-CCD6-4F78-B586-E4BE548549CF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Db.csproj", "{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL", "src\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL\Publication.Rabbit.Subscription.Storage.RmqSubscriber.BL.csproj", "{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "publication.rabbit.subscription.storage.consoleinput", "src\consoleinput\publication.rabbit.subscription.storage.consoleinput.csproj", "{A3E07293-E20B-4A24-801F-E27FFFF68906}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.ConsoleInput", "src\consoleinput\publication.rabbit.subscription.storage.consoleinput.csproj", "{A3E07293-E20B-4A24-801F-E27FFFF68906}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}"
 EndProject
@@ -85,6 +87,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P.R.S.S.Notifications.Infra.Daemon", "src\Notifications\Infra\Daemon\P.R.S.S.Notifications.Infra.Daemon.csproj", "{E56A5C8B-D994-436D-97D8-DFB0D27D2392}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.Notifications.Domain", "src\Notifications\Domain\Publication.Rabbit.Subscription.Storage.Notifications.Domain.csproj", "{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BL", "BL", "{426A5F51-82E1-4E91-86E3-BB664BB87E31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{A51A292F-F80D-45EA-BB84-E911E0B0AB7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{FD538354-32C4-49BC-94D1-7B77E80B524D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Facade", "Facade", "{4A04312E-ECD7-4F56-9258-B418919DC541}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BL", "BL", "{7E947E5E-B660-42A4-8FA2-7E7087D0247C}"
+	ProjectSection(SolutionItems) = preProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publication.Rabbit.Subscription.Storage.Notifications.BL", "src\Notifications\BL\Publication.Rabbit.Subscription.Storage.Notifications.BL.csproj", "{2B40CFD0-8C9C-4668-87F1-01C9A930C142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleInput", "ConsoleInput", "{0C76B804-F67D-4E1B-A0EA-07C1A09F50C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -184,11 +202,21 @@ Global
 		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B40CFD0-8C9C-4668-87F1-01C9A930C142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B40CFD0-8C9C-4668-87F1-01C9A930C142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B40CFD0-8C9C-4668-87F1-01C9A930C142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B40CFD0-8C9C-4668-87F1-01C9A930C142}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{A3E07293-E20B-4A24-801F-E27FFFF68906} = {0C76B804-F67D-4E1B-A0EA-07C1A09F50C9}
+		{7E947E5E-B660-42A4-8FA2-7E7087D0247C} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
+		{4A04312E-ECD7-4F56-9258-B418919DC541} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
+		{FD538354-32C4-49BC-94D1-7B77E80B524D} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
+		{A51A292F-F80D-45EA-BB84-E911E0B0AB7C} = {2C524BC5-6A84-47DB-B407-FDB19001D484}
+		{426A5F51-82E1-4E91-86E3-BB664BB87E31} = {4802D3B6-746F-4022-B559-C189C7DB1C80}
 		{180AEA2E-0223-4C88-800B-2480CAB87022} = {116A8900-2C45-4388-936C-F6CD211E0E17}
 		{BC1F0AAF-E6D5-4444-B359-B53195E77883} = {116A8900-2C45-4388-936C-F6CD211E0E17}
 		{8D094D0A-A228-4FB8-A98A-C1D44F13E1A3} = {BC1F0AAF-E6D5-4444-B359-B53195E77883}
@@ -212,17 +240,15 @@ Global
 		{6047BD1A-606A-4464-A727-4E19575CA340} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{95AFDECB-0C02-46EA-8975-950131A53E85} = {A2F03EFB-EA43-4A05-9D64-FD9862EA28CF}
 		{0FC76430-9EFA-4B03-95D3-3AA316847907} = {80038217-E441-45FD-AB3B-A3918F89A685}
-		{8E5B256C-CCD6-4F78-B586-E4BE548549CF} = {6F0E1B61-0CB0-44E2-9E0A-788579184EFC}
-		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6} = {8E5B256C-CCD6-4F78-B586-E4BE548549CF}
-		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86} = {8E5B256C-CCD6-4F78-B586-E4BE548549CF}
-		{A3E07293-E20B-4A24-801F-E27FFFF68906} = {6F0E1B61-0CB0-44E2-9E0A-788579184EFC}
-		{E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47} = {6F0E1B61-0CB0-44E2-9E0A-788579184EFC}
-		{DD572B81-B62A-4B48-AD17-19EEF648E051} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
+		{7F88624C-DBA8-4BB3-B8EF-4F0C41C715E6} = {A51A292F-F80D-45EA-BB84-E911E0B0AB7C}
+		{DBC696B6-3F25-4A2C-A535-B1B1ECE72E86} = {426A5F51-82E1-4E91-86E3-BB664BB87E31}
+		{DD572B81-B62A-4B48-AD17-19EEF648E051} = {4A04312E-ECD7-4F56-9258-B418919DC541}
 		{34B9646F-E045-4082-BD27-A718D12430DE} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
 		{48C116B2-48F5-4245-9A1F-9A6F7FCDD52F} = {34B9646F-E045-4082-BD27-A718D12430DE}
 		{41CFB9CD-3E69-4405-B1F5-62A7DCF4FB6A} = {34B9646F-E045-4082-BD27-A718D12430DE}
 		{E56A5C8B-D994-436D-97D8-DFB0D27D2392} = {34B9646F-E045-4082-BD27-A718D12430DE}
-		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3} = {E7AB45CD-0CBB-46E1-B5F8-DC7BF4D21F47}
+		{3EF1A12D-9D8F-4833-B40A-9C44663AAED3} = {FD538354-32C4-49BC-94D1-7B77E80B524D}
+		{2B40CFD0-8C9C-4668-87F1-01C9A930C142} = {7E947E5E-B660-42A4-8FA2-7E7087D0247C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F468455E-197D-40D8-A851-8DA860A7DB1A}
