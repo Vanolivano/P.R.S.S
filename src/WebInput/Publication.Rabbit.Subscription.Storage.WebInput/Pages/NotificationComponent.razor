@@ -1,9 +1,10 @@
 @using Microsoft.AspNetCore.SignalR.Client
+@using Publication.Rabbit.Subscription.Storage.WebInput
 @inject NavigationManager Navigation
 @implements IAsyncDisposable
 
 <PageTitle>Notification</PageTitle>
-<h1>NOTIFICATIONS:</h1>
+<h2>NOTIFICATIONS:</h2>
 <ul id="messagesList">
     @foreach (var message in messages)
     {
@@ -18,12 +19,11 @@
     protected override async Task OnInitializedAsync()
     {
         hubConnection = new HubConnectionBuilder()
-            .WithUrl(Navigation.ToAbsoluteUri("/notificationHub"))
-            .Build();
+        .WithUrl(Navigation.ToAbsoluteUri(Constants.NotificationHubRelativeUri))
+        .Build();
 
-        hubConnection.On<string>("ReceiveMessage", (message) =>
+        hubConnection.On<string>(Constants.ReceiveMessage, (message) =>
         {
-            Console.WriteLine("On ReceiveMessage {0}", message);
             messages.Add(message);
             InvokeAsync(StateHasChanged);
         });

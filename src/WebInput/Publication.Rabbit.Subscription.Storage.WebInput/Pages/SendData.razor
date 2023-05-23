@@ -68,6 +68,9 @@
     protected override void OnInitialized()
     {
         _personModel.BirthDate = new DateTime(2002, 01, 01);
+        _personModel.Name = "Ivanov Ivan";
+        _personModel.Age = 18;
+        _personModel.Gender = Gender.M;
     }
 
     protected override void OnAfterRender(bool firstRender)

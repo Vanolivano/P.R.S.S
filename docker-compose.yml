@@ -44,7 +44,6 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5049"
-      RMQ_PUBLISHER_HTTP_CLIENT_NAME_STRING: "rmq-publisher-http-client"
       RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS: "http://rmq-publisher-http:5047"
       NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS: "http://prss-notification-http:5211"
       RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@rabbit-mq:5672"
