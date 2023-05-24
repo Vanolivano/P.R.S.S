@@ -5,6 +5,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "RABBIT_MQ_CONNECTION_STRING": "amqp://guest:guest@localhost:4672",
+        "NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS": "http://localhost:5211",
         "AUTH_TOKEN": "784aae1c1abb4aa3914f42a81e893ed2"
       },
       "applicationUrl": "http://localhost:5171",

@@ -17,6 +17,8 @@
         <ProjectReference Include="..\..\RmqSubscriber\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy\Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.csproj" />
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services\Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services.csproj" />
         <ProjectReference Include="..\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy\Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy.csproj" />
+        <ProjectReference Include="..\..\Notifications\Infra\Proxy\Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy.csproj" />
+        <ProjectReference Include="..\..\Notifications\Facade\Publication.Rabbit.Subscription.Storage.Notifications.Facade.csproj" />
     </ItemGroup>
 
 </Project>

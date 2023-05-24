@@ -4,6 +4,7 @@ using Publication.Rabbit.Subscription.Storage.RmqPublisher.BL.Services;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Authorizers;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon.Validators;
 using Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy.DI;
+using Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy.DI;
 
 namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 {
@@ -19,6 +20,7 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Daemon
 			builder.Services.AddBearerAuthorization(builder.Configuration);
 			builder.Services.AddRmqPublisherService();
 			builder.Services.AddRmqSubscriberClient(builder.Configuration);
+			builder.Services.AddNotificationClient(builder.Configuration);
 			var app = builder.Build();
 
 			app.MapControllers();

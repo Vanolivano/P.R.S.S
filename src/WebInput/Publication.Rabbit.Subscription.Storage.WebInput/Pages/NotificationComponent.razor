@@ -14,7 +14,7 @@
 
 @code {
     private HubConnection hubConnection;
-    private List<string> messages = new List<string>();
+    private Stack<string> messages = new Stack<string>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -24,7 +24,7 @@
 
         hubConnection.On<string>(Constants.ReceiveMessage, (message) =>
         {
-            messages.Add(message);
+            messages.Push(message);
             InvokeAsync(StateHasChanged);
         });
 

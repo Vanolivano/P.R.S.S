@@ -37,8 +37,8 @@ namespace Publication.Rabbit.Subscription.Storage.RmqSubscriber.Infra.Dtt.Proxy
 				using var connection = factory.CreateConnection();
 				using var channel = connection.CreateModel();
 
-				string data = JsonConvert.SerializeObject(message);
-				var body = Encoding.UTF8.GetBytes(data);
+				//string data = JsonConvert.SerializeObject(message);
+				var body = Encoding.UTF8.GetBytes(message);
 				channel.BasicPublish(
 					exchange: string.Empty,
 					routingKey: NotificationsConstants.PostKey,

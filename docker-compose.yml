@@ -13,6 +13,7 @@ services:
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5047"
       RABBIT_MQ_CONNECTION_STRING: "amqp://guest:guest@rabbit-mq:5672"
+      NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS: "http://prss-notification-http:5211"
       AUTH_TOKEN: "784aae1c1abb4aa3914f42a81e893ed2"
     restart: always
     

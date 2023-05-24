@@ -82,6 +82,6 @@
     {
         Result = await _rmqPublisherClient.SendData(_personModel);
         if(Result.Succeeded == false) return;
-        Result = await _notificationClient.PushMessageAsync("Data has been sended to RmqPublisher from WebInput");
+        Result = await _notificationClient.PushMessageAsync("Data has been sended to RmqPublisher from WebInput.");
     }
 }
