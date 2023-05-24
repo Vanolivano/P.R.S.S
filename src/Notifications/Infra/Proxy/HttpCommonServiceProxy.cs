@@ -25,7 +25,6 @@ namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
 
 
 		public HttpNotificationClientProxy(
-			IOptions<HttpClientConfig> config,
 			IOptions<AuthConfig> authConfig,
 			IHttpClientFactory httpClientFactory,
 			ILogger<HttpNotificationClientProxy> logger)
