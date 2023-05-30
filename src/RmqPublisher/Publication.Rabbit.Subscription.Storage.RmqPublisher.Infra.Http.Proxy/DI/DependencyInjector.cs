@@ -14,10 +14,7 @@ public static class DependencyInjector
             .Configure<AuthConfig>(ac => { ac.AuthToken = conf.GetValue<string>("AUTH_TOKEN"); })
             .AddSingleton<IRmqPublisherClient, HttpRmqPublisherServiceProxy>()
             .AddHttpClient(
-            Constants.RmqPublisherHttpClientName,
-            httpClient =>
-            {
-                httpClient.BaseAddress = new Uri(conf.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS"));
-            });
+                Constants.RmqPublisherHttpClientName,
+                httpClient => { httpClient.BaseAddress = new Uri(conf.GetValue<string>("RMQ_PUBLISHER_HTTP_CLIENT_BASE_ADDRESS")); });
     }
 }
