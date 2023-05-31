@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http.Headers;
 using Dev.Tools.Configs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,7 @@ public static class DependencyInjector
                 httpClient =>
                 {
                     httpClient.BaseAddress = new Uri(conf.GetValue<string>("NOTIFICATION_HTTP_CLIENT_BASE_ADDRESS"));
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", conf["AUTH_TOKEN"]);
                 });
     }
 

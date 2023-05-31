@@ -4,11 +4,10 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools.Helpers;
 using Dev.Tools.Results;
 using Dev.Tools.Results.Builders;
 
-namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy;
+namespace Dev.Tools.Helpers.Http;
 
 public static class HttpClientExtensions
 {
@@ -21,23 +20,17 @@ public static class HttpClientExtensions
         T dto,
         string controllerName,
         string methodName,
-        string authToken,
         CancellationToken token = default)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, GetRequestUri(controllerName, methodName))
-        {
-            Content = new StringContent(
-                    JsonSerializer.Serialize(dto),
-                    Encoding.UTF8,
-                    MediaType)
-        };
-        request.Headers.AppendAuthorizationHeader(authToken);
-
-
         try
         {
-            using var response = await client.SendAsync(request, token)
-                .ConfigureAwait(false);
+            using StringContent stringContent = new(JsonSerializer.Serialize(dto),
+                                                    Encoding.UTF8,
+                                                    MediaType);
+
+            using var response = await client.PostAsync(GetRequestUri(controllerName, methodName),
+                                                        stringContent,
+                                                        token).ConfigureAwait(false);
 
             if (response.IsSuccessStatusCode)
             {

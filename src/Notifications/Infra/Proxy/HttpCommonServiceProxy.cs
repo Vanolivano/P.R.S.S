@@ -1,105 +1,39 @@
-using System;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools.Configs;
-using Dev.Tools.Helpers;
+using Dev.Tools.Helpers.Http;
 using Dev.Tools.Results;
-using Dev.Tools.Results.Builders;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Publication.Rabbit.Subscription.Storage.Notifications.Facade;
 
-namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy
+namespace Publication.Rabbit.Subscription.Storage.Notifications.Infra.Proxy;
+internal sealed class HttpNotificationClientProxy : INotificationClient
 {
-	internal sealed partial class HttpNotificationClientProxy
-	{
-		private const string MediaType = "application/json";
-		private const string RequestPrefix = "api/v1";
-        private const string NotificationControllerName = "notifications";
+    private const string ControllerName = "notifications";
+    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ILogger<HttpNotificationClientProxy> _logger;
 
-        private string AuthToken { get; }
-		private readonly HttpClient _httpClient;
-		private readonly ILogger<HttpNotificationClientProxy> _logger;
+    public HttpNotificationClientProxy(IHttpClientFactory httpClientFactory,
+                                       ILogger<HttpNotificationClientProxy> logger) =>
+        (_httpClientFactory, _logger) = (httpClientFactory, logger);
 
+    public async Task<ISuccessData> PushMessageAsync(string message, CancellationToken cancellationToken)
+    {
+        //Метод прокси знает название метода контроллера
+        var methodName = "push-message";
+        //Прокси сам создает HttpClient, прокси знает имя клиента, потому что сам его и формирует. 
+        using var httpClient = _httpClientFactory.CreateClient(Constants.NotificationsHttpClientName);
+        //Метод SendPostAsync<T> описан в статическом HttpClientExtensions
+        var result = await httpClient.SendPostAsync<string>(dto: message,
+                                                            controllerName: ControllerName,
+                                                            methodName: methodName,
+                                                            token: cancellationToken);
 
-		public HttpNotificationClientProxy(
-			IOptions<AuthConfig> authConfig,
-			IHttpClientFactory httpClientFactory,
-			ILogger<HttpNotificationClientProxy> logger)
-		{
-			_httpClient = httpClientFactory.CreateClient(Constants.NotificationsHttpClientName);
-			AuthToken = authConfig.Value.AuthToken;
-			_logger = logger;
-		}
-
-		private static HttpRequestMessage CreateHttpRequestMessage(
-			HttpMethod method,
-			string requestUri,
-			string message,
-			string authToken)
-		{
-			var request = new HttpRequestMessage(method, requestUri)
-			{
-				Content = new StringContent(
-					JsonSerializer.Serialize(message),
-					Encoding.UTF8,
-					MediaType)
-			};
-			request.Headers.AppendAuthorizationHeader(authToken);
-
-			return request;
-		}
-
-		private async Task<ISuccessData> GetSuccessDataByRequest(
-			HttpRequestMessage request,
-			CancellationToken token)
-		{
-			try
-			{
-				using var response = await _httpClient.SendAsync(request, token)
-					.ConfigureAwait(false);
-
-				if (response.IsSuccessStatusCode)
-				{
-					return SuccessDataBuilder.BuildSuccess();
-				}
-
-				return SuccessDataBuilder.BuildError(await GetErrorDataAsync(response).ConfigureAwait(false));
-			}
-			catch (Exception exception)
-			{
-				_logger.LogError($"Error while sending http request. Reason: {exception.Message}.", exception);
-				return SuccessDataBuilder.BuildError(exception);
-			}
-		}
-
-		private static async Task<IErrorData> GetErrorDataAsync(HttpResponseMessage response)
-		{
-			var errorMessage = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-			return ErrorDataBuilder.BuildErrorData(errorMessage, (int) response.StatusCode);
-		}
-
-		private static string GetNotificationUri(string operation, Guid? id = null) =>
-			GetRequestUri(NotificationControllerName, operation, id);
-
-		private static string GetRequestUri(string controller, string operation, Guid? id)
-		{
-			var res = UrlHelper.Combine(
-				RequestPrefix,
-				controller);
-			if (id != null)
-			{
-				res = UrlHelper.Combine(res, id.ToString());
-			}
-
-			if (operation != null)
-			{
-				res = UrlHelper.Combine(res, operation);
-			}
-
-			return res;
-		}
-	}
+        if (result.ErrorData != null)
+        {
+            _logger.LogError("Error while sending message to notification. " +
+                            $"Reason: {result.ErrorData.ErrorMessage}.");
+        }
+        return result;
+    }
 }

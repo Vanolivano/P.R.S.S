@@ -1,10 +1,9 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Dev.Tools.Configs;
+using Dev.Tools.Helpers.Http;
 using Dev.Tools.Results;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Facade.Args;
 using Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Dto;
@@ -16,31 +15,25 @@ namespace Publication.Rabbit.Subscription.Storage.RmqPublisher.Infra.Http.Proxy
     {
         //Прокси знает название контроллера
         private const string ControllerName = "rmq-publisher";
-        private string AuthToken { get; }
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<HttpRmqPublisherServiceProxy> _logger;
 
 
-        public HttpRmqPublisherServiceProxy(
-            IOptions<AuthConfig> authConfig,
-            IHttpClientFactory httpClientFactory,
-            ILogger<HttpRmqPublisherServiceProxy> logger)
-        {
-            //Прокси сам создает HttpClient, прокси знает имя клиента, потому что сам его и формирует. 
-            _httpClient = httpClientFactory.CreateClient(Constants.RmqPublisherHttpClientName);
-            AuthToken = authConfig.Value.AuthToken;
-            _logger = logger;
-        }
+        public HttpRmqPublisherServiceProxy(IHttpClientFactory httpClientFactory,
+                                            ILogger<HttpRmqPublisherServiceProxy> logger) =>
+            (_httpClientFactory, _logger) = (httpClientFactory, logger);
+
 
         public async Task<ISuccessData> SendData(IPersonArgs args, CancellationToken cancellationToken)
         {
             //Метод прокси знает название метода контроллера
             var methodName = "send-data";
+            //Прокси сам создает HttpClient, прокси знает имя клиента, потому что сам его и формирует. 
+            using var httpClient = _httpClientFactory.CreateClient(Constants.RmqPublisherHttpClientName);
             //Метод SendPostAsync<T> описан в статическом HttpClientExtensions
-            var result = await _httpClient.SendPostAsync<PersonDto>(dto: args.ToDto(),
+            var result = await httpClient.SendPostAsync<PersonDto>(dto: args.ToDto(),
                                                                     controllerName: ControllerName,
                                                                     methodName: methodName,
-                                                                    authToken: AuthToken,
                                                                     token: cancellationToken);
 
             if (result.ErrorData != null)
